@@ -1,0 +1,150 @@
+<div>
+
+    <h5>Consulta de Produtos</h5>
+    <p>Listagem de produtos cadastrados.</p>
+
+    <table class="table table-hover table-light table-striped">
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let item of listagemProduto">
+                <td>{{item.nome}}</td>
+                <td>{{item.descricao}}</td>
+                <td>{{item.quantidade}}</td>
+                <td>{{item.preco}}</td>
+                <td>
+                    <button data-bs-target="#janela-edicao"
+                            data-bs-toggle="modal"
+                            (click)="obterProduto(item.idProduto)"
+                            class="btn btn-primary">
+                        Atualizar
+                    </button>
+                    &nbsp;
+                    <button data-bs-target="#janela-exclusao"
+                            data-bs-toggle="modal"
+                            (click)="obterProduto(item.idProduto)"
+                            class="btn btn-danger">
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <td colspan="5">Quantidade de registros: {{listagemProduto.length}}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+
+<div id="janela-edicao" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white">Atualizar Produto</h5>
+            </div>
+            <div class="modal-body">
+
+                <form #formAtualizar="ngForm" (submit)="atualizarProduto(produto)">
+
+                    <input type="hidden" name="idProduto"
+                            [(ngModel)]="produto.idProduto">
+
+                    <label>Nome do Produto:</label>
+                    <input type="text" name="nome" 
+                            class="form-control" 
+                            [(ngModel)]="produto.nome"
+                            placeholder="Ex: Detergente">
+                    <br>
+
+                    <label>Quantidade:</label>
+                    <input type="text" name="quantidade" 
+                            class="form-control"
+                            [(ngModel)]="produto.quantidade" 
+                            placeholder="Ex: 1000">
+                    <br>
+
+                    <label>Preço:</label>
+                    <input type="text" name="preco" 
+                            class="form-control"
+                            [(ngModel)]="produto.preco" 
+                            placeholder="Ex: R$ 10,99">
+                    <br>
+
+                    <label>Descrição:</label>
+                    <input type="text" name="descricao" 
+                            class="form-control"
+                            [(ngModel)]="produto.descricao" 
+                            placeholder="Ex: Produto Frágil">
+                    <br>
+
+                    <div class="text-end">
+                        <button data-bs-dismiss="modal" class="btn btn-secondary">Fechar Janela</button>
+                        &nbsp;
+                        <input type="submit" class="btn btn-primary" value="Salvar Alterações">
+                    </div>
+
+                    <div class="text-success mt-3">
+                        <strong>{{mensagem}}</strong>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="janela-exclusao" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">Atualizar Produto</h5>
+            </div>
+            <div class="modal-body">
+
+                Deseja realmente excluir o produto selecionado?
+                <hr>
+
+                <div>
+                    Nome do Produto: <strong>{{produto.nome}}</strong>
+                </div>
+                
+                <div>
+                    Descrição: <strong>{{produto.descricao}}</strong>
+                </div>
+
+                <div>
+                    Quantidade: <strong>{{produto.quantidade}}</strong>
+                </div>
+
+                <div>
+                    Preço: <strong>{{produto.preco}}</strong>
+                </div>
+                <hr>
+
+
+                <div class="text-end">
+                    <button data-bs-dismiss="modal" class="btn btn-secondary">Fechar Janela</button>
+                    &nbsp;
+                    <button class="btn btn-danger" (click)="excluirProduto(produto.idProduto)">Excluir Produto</button>
+                </div>
+
+                <div class="text-success mt-3">
+                    <strong>{{mensagem}}</strong>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

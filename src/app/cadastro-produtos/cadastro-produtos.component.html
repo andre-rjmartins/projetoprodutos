@@ -1,0 +1,44 @@
+<div class="row">
+    
+    <h5>Cadastro de Produtos</h5>
+    <p>Preencha o formulário para cadastrar um produto.</p>
+
+    <div class="col-md-4">
+
+        <form #formCadastro="ngForm" (submit)="cadastrarProduto(formCadastro)" autocomplete="off">
+
+            <label>Nome do Produto:</label>
+            <input type="text" name="nome" 
+                    class="form-control" 
+                    ngModel 
+                    placeholder="Ex: Detergente">
+            <br>
+
+            <label>Quantidade:</label>
+            <input type="text" name="quantidade" 
+                    class="form-control"
+                    ngModel 
+                    placeholder="Ex: 1000">
+            <br>
+
+            <label>Preço:</label>
+            <input type="text" name="preco" 
+                    class="form-control" 
+                    ngModel
+                    placeholder="Ex: R$ 10,99">
+            <br>
+
+            <label>Descrição:</label>
+            <input type="text" name="descricao" 
+                    class="form-control" 
+                    ngModel
+                    placeholder="Ex: Produto Frágil">
+            <br>
+
+            <input type="submit" class="btn btn-success" value="Cadastrar Produto">
+        </form>
+        &nbsp;
+        <h6>{{mensagem}}</h6>
+
+    </div>
+</div>
